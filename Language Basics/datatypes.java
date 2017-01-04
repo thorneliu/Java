@@ -11,8 +11,6 @@ class dataTypesDemo
 
 		long creditCardNumber =  6225_7687_1385_7716L;
 
-
-
 		System.out.println("ivar:" + ivar);
 		System.out.println("bvar:" + bvar);
 		System.out.println("bflag:" + bflag);

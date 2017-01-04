@@ -1,3 +1,3 @@
 # Java
 
-http://docs.oracle.com/javase/tutoria
+http://docs.oracle.com/javase/tutorial
