@@ -27,10 +27,17 @@ class interfaceDemo extends Father
 		System.out.println("Implemented method bar....");
 	}
 
+	@Override
+	public void func()
+	{
+		System.out.println("Overrided method func in interfaceDemo ....");
+	}
+
 	public static void main(String[] args)
 	{
 		interfaceDemo demo = new interfaceDemo();
 		demo.fooMethod();
 		demo.barMethod();
+		demo.func();
 	}
 }
