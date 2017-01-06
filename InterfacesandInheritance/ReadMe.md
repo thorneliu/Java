@@ -26,3 +26,11 @@ int doSomethingElse(String s);
 The public access specifier indicates that the interface can be used by any class in any package.
 
 The interface body can contain abstract methods, default methods, and static methods
+
+
+#Staic method
+
+like class variables, static method in interfaces 
+A static method is a method is a method that is associated with the class in which it is defined rather than with any object.
+
+Every instance of the class shares its static methods.
