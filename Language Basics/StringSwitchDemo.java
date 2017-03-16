@@ -25,6 +25,14 @@ public class StringSwitchDemo
 			String weekday = "monday";
 			int dayNumber = getWeekDayNumber(weekday);
 			System.out.println(dayNumber);
+
+			String failureReason = "ss";
+			if(dayNumber == 1) {
+				failureReason = failureReason.concat("total crl length is too much");
+			}
+			
+			System.out.println(failureReason);
+
 		}
 }
 
