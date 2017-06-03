@@ -164,3 +164,6 @@ public class TaskRunner implements Runnable {
 
 
 
+      Java 理论与实践: 处理 InterruptedException：http://www.ibm.com/developerworks/cn/java/j-jtp05236.html
+
+      详细分析Java中断机制：http://www.infoq.com/cn/articles/java-interrupt-mechanism
