@@ -35,9 +35,45 @@
 
 把被测对象作为黑盒，而先于实现代码输出单元测试用例是可能的。一个典型的例子就是如[leetcode](https://leetcode.com)这样的网络编程挑战平台。平台上有很多的题目，并且它为每一道题目提供了足够的测试用例来判断每个挑战者提交的代码功能是否完整。每个挑战者提交的答案里必定包含多种不同的实现方式，但这并不妨碍平台有一份公共的单元测试用例。
 
-接下来我们讲一讲这种测试的一些优势：
+接下来我们讲一讲这种测试的一些优势。
 ### 依赖被测对象的抽象
+交付的单元测试代码如果依赖的是被测类的抽象的话，则表明改单元测试代码的输入不是产品实现代码，而是产品设计。在产品设计阶段，我们会得到类的命名以及其主要的数据(fields)和对外提供的接口(methods)。从这个角度来说，在Design的阶段，我们就已经约定了某个类的对外提供的具体服务，以及该类对外提供的某种功能。
 
+比如一个叫做AttachmentMaker的类，其Design内容为
+```
+class AttachmentMaker{
+    An attachmentMaker builds attachment of NE3S feedback or Oats.
+    ---
+    + Attachment asFeedbackAttachment(BigInteger successful,...,String messageResult)
+    + Attachment asOatsAttachment(List<ManagedObject> logEvents, String neName)
+
+}
+```
+在Design阶段，我们对于该类的基本期望就已经是明确的，即使我们不知道这个类的内部会如何实现：
+1. 给定`successful...messageResult`等入参并调用`asFeedbackAttachment`接口时，AttachmentMaker能够构建正确格式的NE3S feedback
+2. 给定一个`Events`的列表和`neName`调用asOatsAttachment接口时，AttachmentMaker能够构建正确格式的Oats xml
+3. 异常的case，当输入的`List<ManagedObject> logEvents`是空列表时，调用asOatsAttachment输出的attachment的内容应当如何如何。
+
+可以看到，以上的期望便是以文字描述的单元测试用例，我们完全可以把它翻译成UT cases：
+```
+  public void should_generateCorrectFeedbackAttachment_when_asFeedbackAttachment()
+  public void should_generateCorrectOatsAttachment_when_asOatsAttachment()
+  ...
+```
+在代码实现之前，我们可以根据其Design和行为描述输出单元测试用例--- 这符合TDD的基本思想，即优先输出被测对象的测试用例，来保证和约束
+产品代码的合理性。
+
+单元测试代码依赖被测对象的抽象时，是根据代码Design来指导单元测试用例代码。反过来，在单元测试用例的实现阶段，我们可以通过写单元测试用例的
+这一过程，反过来推敲该Design的合理性，形成Desgin到UT之间相互验证的闭环。
+```
+        +------------------->-----------+
+        |                               |
+    +---+-------+              +--------+----+
+    | Design    |              |   UT cases  |
+    +-----+-----+              +----+--------+
+          |                         |
+          +---------<---------------+
+```
 
 
 ### 能保证被测对象功能正确
